@@ -41,3 +41,9 @@ https://github.com/e-jigsaw/tumblub を改め、tumblr-bu向けに
 ## effector
 
 ### よろ
+
+* tumblub-kaiに問い合わせ
+* 返ってきた画像をいくらか貯めて表に出せるようにする
+* パッチ当てる感じでエフェクトを色々かける
+  * 例えば仕込んでおいたGLSLシェーダでエフェクトをかける
+  * GLSLシェーダならライブコーディング可能
