@@ -1,0 +1,28 @@
+{
+  "name": "tumblr-jocky-server",
+  "version": "0.0.0",
+  "description": "tumblr jockey server",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kosendj/tumblr-jocky-server.git"
+  },
+  "author": "jigsaw (http://jgs.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kosendj/tumblr-jocky-server/issues"
+  },
+  "homepage": "https://github.com/kosendj/tumblr-jocky-server",
+  "dependencies": {
+    "express": "^4.0.0",
+    "jade": "^1.3.1",
+    "passport": "^0.2.0",
+    "passport-tumblr": "^0.1.2",
+    "coffee-script": "^1.7.1",
+    "cookie-parser": "^1.0.1",
+    "express-session": "^1.0.2"
+  }
+}
