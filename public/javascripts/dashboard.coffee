@@ -80,11 +80,8 @@ class Dashboard
     $current = $(".current")
     $reblog = $(".reblog")
     $reblog.show()
-    $.post "/api/user/#{@username}/dashboard/reblog",
-      token: @token
-      id: $current.attr("data-id")
+    $.post "/api/post/#{$current.attr("data-id")}/reblog",
       reblogKey: $current.attr("data-reblogKey")
-      baseHostName: @primaryBlog.baseHostName
     , (data)->
       $reblog.hide()
       $(".finish").show().fadeOut()

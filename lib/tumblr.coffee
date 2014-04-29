@@ -9,6 +9,13 @@ createClient = (token, secret)->
     token: token
     token_secret: secret
 
+createTJbu = ->
+  tumblr.createClient
+    consumer_key: process.env.CONSUMER_KEY
+    consumer_secret: process.env.CONSUMER_SECRET
+    token: process.env.TJBU_TOKEN
+    token_secret: process.env.TJBU_SECRET
+
 exports.dashboard = (req, res)->
   client = createClient req.session.passport.user.token, req.session.passport.user.secret
   if req.query.init is "true"
@@ -29,4 +36,10 @@ exports.tumblog = (req, res)->
   res.send 'TODO'
 
 exports.reblog = (req, res)->
-  res.send 'TODO'
+  client = createTJbu()
+  console.log req
+  client.reblog "tjbu",
+    id: req.params.id
+    reblog_key: req.body.reblogKey
+  , (err)->
+    res.send JSON.stringify({status: 'success'})

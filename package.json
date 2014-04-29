@@ -28,6 +28,7 @@
     "tumblr.js": "0.0.4",
     "stylus": "~0.44.0",
     "async": "~0.7.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "body-parser": "~1.0.2"
   }
 }

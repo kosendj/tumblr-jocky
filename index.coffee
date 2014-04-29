@@ -1,4 +1,5 @@
 express = require 'express'
+bodyParser = require 'body-parser'
 cookieParser = require 'cookie-parser'
 session = require 'express-session'
 passport = require 'passport'
@@ -10,6 +11,7 @@ app = express()
 
 app.set 'views', "#{__dirname}/views"
 app.set 'view engine', 'jade'
+app.use bodyParser()
 app.use cookieParser()
 app.use session
   secret: 'secret'
@@ -50,6 +52,6 @@ app.get '/dashboard', (req, res)-> res.render 'dashboard'
 
 app.get '/api/dashboard', tumblr.dashboard
 app.get '/api/tumblog', tumblr.tumblog
-app.get '/api/post/:id/reblog', tumblr.reblog
+app.post '/api/post/:id/reblog', tumblr.reblog
 
 app.listen process.env.PORT || 3000
