@@ -1,3 +1,5 @@
+_ = require 'lodash'
+async = require 'async'
 tumblr = require 'tumblr.js'
 
 createClient = (token, secret)->
@@ -9,8 +11,19 @@ createClient = (token, secret)->
 
 exports.dashboard = (req, res)->
   client = createClient req.session.passport.user.token, req.session.passport.user.secret
-  client.dashboard {}, (err, data)->
-    res.send JSON.stringify(data.posts)
+  if req.query.init is "true"
+    async.map [0..4], (num, callback)->
+      client.dashboard
+        offset: num * 20
+      , (err, data)->
+        callback err, data.posts
+    , (err, results)->
+      res.send JSON.stringify(_.flatten(results))
+  else
+    client.dashboard
+      since_id: req.query.since_id
+    , (err, data)->
+      res.send JSON.stringify(data.posts)
 
 exports.tumblog = (req, res)->
   res.send 'TODO'

@@ -1,0 +1,106 @@
+html,
+body {
+  background-color: #2c4762;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+html article,
+body article {
+  width: 100%;
+  height: 100%;
+}
+html article .post,
+body article .post {
+  width: 100%;
+  height: 100%;
+}
+html article .post .photo,
+body article .post .photo,
+html article .post .img,
+body article .post .img {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+html article .post .text,
+body article .post .text,
+html article .post .quote,
+body article .post .quote {
+  width: 100%;
+  height: 100%;
+}
+html article .post .text .container,
+body article .post .text .container,
+html article .post .quote .container,
+body article .post .quote .container {
+  background-color: #fff;
+  color: #808080;
+  font-size: xx-large;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+html article .wait,
+body article .wait,
+html article .done,
+body article .done,
+html article .next,
+body article .next {
+  display: none;
+}
+html article .current,
+body article .current {
+  display: block;
+}
+html .notify,
+body .notify {
+  display: none;
+  position: fixed;
+  right: 5%;
+  top: 5%;
+  font-size: large;
+  background-color: rgba(0,0,0,0.6);
+  color: #eee;
+  padding: 10px;
+}
+html .controller,
+body .controller {
+  background-color: rgba(0,0,0,0.6);
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  padding: 5px;
+}
+html .controller img,
+body .controller img {
+  margin: 5px;
+}
+html .controller img:active,
+body .controller img:active {
+  background-color: rgba(233,233,233,0.8);
+}
+html .setting,
+body .setting {
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  margin: 0 auto;
+  color: #eee;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.6);
+}
+html .setting ul,
+body .setting ul {
+  list-style-type: none;
+}
+html .postInfo,
+body .postInfo {
+  position: fixed;
+  left: 5%;
+  bottom: 5%;
+  color: #fff;
+  background-color: rgba(0,0,0,0.6);
+}

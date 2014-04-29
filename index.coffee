@@ -16,6 +16,8 @@ app.use session
   key: 'sid'
 app.use passport.initialize()
 app.use passport.session()
+app.use require('stylus').middleware
+  src: "#{__dirname}/public"
 app.use coffee
   src: "#{__dirname}/public"
 app.use express.static("#{__dirname}/public")
@@ -40,6 +42,8 @@ app.get '/', (req, res)-> res.render 'index'
 
 app.get '/login', passport.authenticate 'tumblr'
 app.get '/login/callback', passport.authenticate('tumblr', {failureRedirect: '/login'}), (req, res)->
+  res.cookie "username", req.user.username
+  res.cookie "token", req.user.token
   res.redirect '/dashboard'
 
 app.get '/dashboard', (req, res)-> res.render 'dashboard'
