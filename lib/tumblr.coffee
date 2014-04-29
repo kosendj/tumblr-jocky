@@ -11,3 +11,9 @@ exports.dashboard = (req, res)->
   client = createClient req.session.passport.user.token, req.session.passport.user.secret
   client.dashboard {}, (err, data)->
     res.send JSON.stringify(data.posts)
+
+exports.tumblog = (req, res)->
+  res.send 'TODO'
+
+exports.reblog = (req, res)->
+  res.send 'TODO'

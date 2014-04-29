@@ -45,5 +45,7 @@ app.get '/login/callback', passport.authenticate('tumblr', {failureRedirect: '/l
 app.get '/dashboard', (req, res)-> res.render 'dashboard'
 
 app.get '/api/dashboard', tumblr.dashboard
+app.get '/api/tumblog', tumblr.tumblog
+app.get '/api/post/:id/reblog', tumblr.reblog
 
 app.listen process.env.PORT || 3000
