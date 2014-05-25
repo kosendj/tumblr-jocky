@@ -34,6 +34,7 @@ class Dashboard
     @primaryBlog.baseHostName = @primaryBlog.url.replace(/http:\/\//, "").replace(/\/$/, "")
 
   start: ->
+    @posts.removeAll()
     $.getJSON @boards[@currentBoard],
       init: true
     , (posts)=>
@@ -94,11 +95,16 @@ class Dashboard
       $(".finish").show().fadeOut()
 
   switchBoard: ->
-    keymap = _.map Object.keys(@boards), (key, i)->
-      obj = {}
-      obj[key] = i
-      obj
-    next = keymap[@currentBoard] + 1
+    boards = Object.keys(@boards)
+    for board, i in boards
+      if board is @currentBoard
+        if i < (boards.length-1)
+          next = i + 1
+        else
+          next = 0
+    @currentBoard = boards[next]
+    console.log @currentBoard
+    @start()
 
   checkPosts: ->
     @fetchDashboard() if $(".wait").length < 50

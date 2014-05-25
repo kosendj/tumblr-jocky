@@ -34,7 +34,7 @@ exports.dashboard = (req, res)->
 
 exports.tumblog = (req, res)->
   client = createClient req.session.passport.user.token, req.session.passport.user.secret
-  client.posts "tumblr.jgs.me",
+  client.posts req.query.name,
     type: 'photo'
   , (err, data)->
     res.send JSON.stringify(data.posts)

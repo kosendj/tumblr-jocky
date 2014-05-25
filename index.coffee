@@ -5,6 +5,7 @@ session = require 'express-session'
 passport = require 'passport'
 TumblrStrategy = require('passport-tumblr').Strategy
 coffee = require 'coffee-middleware'
+stylus = require('stylus').middleware
 tumblr = require './lib/tumblr'
 
 app = express()
@@ -18,7 +19,7 @@ app.use session
   key: 'sid'
 app.use passport.initialize()
 app.use passport.session()
-app.use require('stylus').middleware
+app.use stylus
   src: "#{__dirname}/public"
 app.use coffee
   src: "#{__dirname}/public"
