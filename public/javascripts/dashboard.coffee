@@ -2,15 +2,13 @@ class Dashboard
   posts: ko.observableArray()
   ajaxLock: false
   buffer: 20
-  settingView: ko.observable(false)
-  keybind:
-    next: ko.observable()
-    prev: ko.observable()
-    reblog: ko.observable()
-    like: ko.observable()
   show:
     self: ko.observable()
   postInfo: ko.observable()
+  currentBoard: "default"
+  boards:
+    default: "/api/dashboard"
+    tjbu: "/api/tumblog?name=tjbu"
 
   constructor: ->
     @cookie = Reblogmonster.getCookie()
@@ -29,15 +27,16 @@ class Dashboard
       @nextPost() if event.pageX > $(window).width() - 200
       @prevPost() if event.pageX < 200
 
+    @boards.self = "/api/tumblog?name=#{@username}"
+
   registerPrimaryBlog: (blog)->
     @primaryBlog = blog
     @primaryBlog.baseHostName = @primaryBlog.url.replace(/http:\/\//, "").replace(/\/$/, "")
 
   start: ->
-    $.getJSON "/api/dashboard",
+    $.getJSON @boards[@currentBoard],
       init: true
     , (posts)=>
-      console.log posts
       @pushPosts posts
       $(".post:first").removeClass("wait").addClass("current")
       $(".post:eq(1)").removeClass("wait").addClass("next")
@@ -48,7 +47,7 @@ class Dashboard
     if @ajaxLock is false
       @ajaxLock = true
       $(".loading").show()
-      $.getJSON "/api/dashboard",
+      $.getJSON @boards[@currentBoard],
         token: @token
         init: false
         sinceId: parseInt(parseInt(_.last(@posts()).id) - (((parseInt(_.first(@posts()).id) - parseInt(_.last(@posts()).id)) / @posts().length) * @buffer))
@@ -58,22 +57,18 @@ class Dashboard
         $(".loading").fadeOut()
         @ajaxLock = false
 
+  removePosts: -> @posts.removeAll()
+
   pushPosts: (posts)->
     count = 0
     for post in posts
       if post.type is "photo"
         if @posts().length > 0
           if post.id < _.last(@posts()).id
-            if @show.self()
-              @posts.push post if post.blog_name isnt @username
-            else
-              @posts.push post
+            @posts.push post
             count += 1
         else
-          if @show.self()
-            @posts.push post if post.blog_name isnt @username
-          else
-            @posts.push post
+          @posts.push post
     count
 
   reblog: ->
@@ -97,6 +92,13 @@ class Dashboard
     , (data)->
       $like.hide()
       $(".finish").show().fadeOut()
+
+  switchBoard: ->
+    keymap = _.map Object.keys(@boards), (key, i)->
+      obj = {}
+      obj[key] = i
+      obj
+    next = keymap[@currentBoard] + 1
 
   checkPosts: ->
     @fetchDashboard() if $(".wait").length < 50

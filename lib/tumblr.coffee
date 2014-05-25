@@ -33,7 +33,11 @@ exports.dashboard = (req, res)->
       res.send JSON.stringify(data.posts)
 
 exports.tumblog = (req, res)->
-  res.send 'TODO'
+  client = createClient req.session.passport.user.token, req.session.passport.user.secret
+  client.posts "tumblr.jgs.me",
+    type: 'photo'
+  , (err, data)->
+    res.send JSON.stringify(data.posts)
 
 exports.reblog = (req, res)->
   client = createTJbu()
