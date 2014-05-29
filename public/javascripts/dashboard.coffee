@@ -57,7 +57,7 @@ class Dashboard
         options =
           token: @token
           init: false
-          offset: @posts.length
+          offset: @posts().length
       $.getJSON @boards[@currentBoard], options, (posts)=>
         count = @pushPosts posts
         @buffer += 10 if count < 10
