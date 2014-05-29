@@ -109,7 +109,6 @@ class Dashboard
         else
           next = 0
     @currentBoard = boards[next]
-    console.log @currentBoard
     @start()
 
   checkPosts: ->

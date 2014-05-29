@@ -34,7 +34,6 @@ exports.dashboard = (req, res)->
 
 exports.tumblog = (req, res)->
   client = createClient req.session.passport.user.token, req.session.passport.user.secret
-  console.log req.query
   client.posts req.query.name,
     type: 'photo'
     offset: req.query.offset
@@ -43,7 +42,6 @@ exports.tumblog = (req, res)->
 
 exports.reblog = (req, res)->
   client = createTJbu()
-  console.log req
   client.reblog "tjbu",
     id: req.params.id
     reblog_key: req.body.reblogKey
