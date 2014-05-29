@@ -1,0 +1,44 @@
+extends layout
+
+block links
+  link(href="/stylesheets/dashboard.css", rel="stylesheet", type="text/css")
+
+block scripts
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js", type="text/javascript")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js", type="text/javascript")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js", type="text/javascript")
+  script(src="/javascripts/reblogmonster.js", type="text/javascript")
+
+block body
+  article(data-bind="foreach: posts")
+    .post.wait(data-bind="template: {name: $data.type+'-tmpl'}, attr: {'data-id': $data.id, 'data-reblogKey': $data.reblog_key, 'data-blogName': $data.blog_name, 'data-notes': $data.note_count}")
+
+  .notify.loading Loading...
+  .notify.reblog reblog...
+  .notify.like like...
+  .notify.finish done!
+
+  .controller
+    img(src="/images/reblog.png", data-bind="click: reblog")
+    img(src="/images/like.png", data-bind="click: like")
+    img(src="/images/switch.png", data-bind="click: switchBoard")
+
+  .postInfo
+    p(data-bind="text: postInfo")
+
+  script(type="text/html", id="text-tmpl")
+    .text
+      .container
+        p(data-bind="html: $data.title")
+        p(data-bind="html: $data.body")
+  script(type="text/html", id="photo-tmpl")
+    .photo
+      .img(data-bind="style: {'background-image': 'url('+$data.photos[0].alt_sizes[0].url+')'}")
+      img(data-bind="attr: {src: $data.photos[0].alt_sizes[0].url}, visible: false")
+  script(type="text/html", id="quote-tmpl")
+    .quote
+      .container
+        p(data-bind="html: $data.text")
+        p(data-bind="html: $data.source")
+
+  script(src="/javascripts/dashboard.js", type="text/javascript")

@@ -23,6 +23,12 @@
     "passport-tumblr": "^0.1.2",
     "coffee-script": "^1.7.1",
     "cookie-parser": "^1.0.1",
-    "express-session": "^1.0.2"
+    "express-session": "^1.0.2",
+    "coffee-middleware": "~0.2.1",
+    "tumblr.js": "0.0.4",
+    "stylus": "~0.44.0",
+    "async": "~0.7.0",
+    "lodash": "~2.4.1",
+    "body-parser": "~1.0.2"
   }
 }
