@@ -48,11 +48,17 @@ class Dashboard
     if @ajaxLock is false
       @ajaxLock = true
       $(".loading").show()
-      $.getJSON @boards[@currentBoard],
-        token: @token
-        init: false
-        sinceId: parseInt(parseInt(_.last(@posts()).id) - (((parseInt(_.first(@posts()).id) - parseInt(_.last(@posts()).id)) / @posts().length) * @buffer))
-      , (posts)=>
+      if @currentBoard is "dashboard"
+        options =
+          token: @token
+          init: false
+          sinceId: parseInt(parseInt(_.last(@posts()).id) - (((parseInt(_.first(@posts()).id) - parseInt(_.last(@posts()).id)) / @posts().length) * @buffer))
+      else
+        options =
+          token: @token
+          init: false
+          offset: @posts.length
+      $.getJSON @boards[@currentBoard], options, (posts)=>
         count = @pushPosts posts
         @buffer += 10 if count < 10
         $(".loading").fadeOut()
