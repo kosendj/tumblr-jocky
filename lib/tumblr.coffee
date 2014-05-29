@@ -34,9 +34,10 @@ exports.dashboard = (req, res)->
 
 exports.tumblog = (req, res)->
   client = createClient req.session.passport.user.token, req.session.passport.user.secret
-  client.posts req.query.name,
+  options =
     type: 'photo'
-  , (err, data)->
+  options.since_id = req.query.since_id if req.query.since_id?
+  client.posts req.query.name, options, (err, data)->
     res.send JSON.stringify(data.posts)
 
 exports.reblog = (req, res)->
